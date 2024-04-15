@@ -69,11 +69,15 @@
 
 ## 获取视频流地址_web端
 
-> https://api.bilibili.com/x/player/playurl
+> https://api.bilibili.com/x/player/wbi/playurl
+
+> ~~https://api.bilibili.com/x/player/playurl~~ （旧链接）
 
 *请求方式：GET*
 
 认证方式：Cookie（SESSDATA）
+
+鉴权方式：[Wbi 签名](../misc/sign/wbi.md)
 
 ---
 
@@ -453,9 +457,9 @@ curl -G 'https://api.bilibili.com/x/player/playurl' \
 | minBufferTime   | num   | 1.5？       |  |
 | min_buffer_time | num   | 1.5？       |  |
 | video           | array | 视频流信息 |              |
-| audio           | array | 伴音流信息 |              |
+| audio           | array | 伴音流信息 | 当视频没有音轨时，此项为 null |
 | dolby           | obj | 杜比全景声伴音信息 |              |
-| flac           | obj | 无损音轨伴音信息 |              |
+| flac           | obj | 无损音轨伴音信息 | 当视频没有无损音轨时，此项为 null |
 
 `dash`中的`video`数组：
 
@@ -495,7 +499,7 @@ curl -G 'https://api.bilibili.com/x/player/playurl' \
 | start_with_sap | num   | **同上**              |  |
 | SegmentBase    | obj   | 见下表                | url 对应 m4s 文件中，头部的位置<br />音频流该值恒为空     |
 | segment_base   | obj   | **同上**              |  |
-| codecid        | num   | 码流编码标识代码 | 含义见 [上表](视频编码代码)<br />音频流该值恒为`0` |
+| codecid        | num   | 码流编码标识代码 | 含义见 [上表](#视频编码代码)<br />音频流该值恒为`0` |
 
 `video`数组中的对象中的`backup_url`数组：
 
